@@ -51,6 +51,7 @@ class Booking extends REST_Controller
 
     		// echo $data['jam_booking']. " - ". $status. "<br>";
     		$this->db->where('id', $data['id']);
+    		$this->db->where('tgl', $date);
     		$this->db->update('tbl_booking', ['status' => $status]);
     	}
 

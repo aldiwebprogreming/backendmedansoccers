@@ -31,17 +31,21 @@ class Lapangan extends REST_Controller
     function index_get(){
 
     	$slug = $this->get('slug');
+        $id = $this->get('id');
 
-    	if ($slug) {
-    		
-    		$lap = $this->db->get_where('tbl_lapangan', ['slug' => $slug])->row_array();
-    	}else{
+        if ($slug) {
 
-    		$lap = $this->db->get('tbl_lapangan')->result();
-    	}
+          $lap = $this->db->get_where('tbl_lapangan', ['slug' => $slug])->row_array();
 
-    	$this->response($lap, 200);
-    }
+      }elseif($id){
+        $lap = $this->db->get_where('tbl_lapangan', ['id' => $id])->row_array();
+    }else{
+
+      $lap = $this->db->get('tbl_lapangan')->result();
+  }
+
+  $this->response($lap, 200);
+}
 
     // function index_post(){
 
@@ -81,7 +85,7 @@ class Lapangan extends REST_Controller
 
     // }
 
-    
+
 }
 
 ?>

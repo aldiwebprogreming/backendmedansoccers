@@ -34,6 +34,8 @@ class Addbooking extends REST_Controller
     	$jam = $this->post('jam');
     	$tgl = $this->post('tgl');
     	$team = $this->post('team');
+    	$kode_status = $this->post('kode_status');
+    	
     	$idlapangan = $this->post('id_lapangan');
 
     	$lap = $this->db->get_where('tbl_lapangan', ['id' => $idlapangan])->row_array();
@@ -70,7 +72,8 @@ class Addbooking extends REST_Controller
     		'team' => $team,
     		'lapangan' => $lap['lapangan'],
     		'id_lapangan' => $idlapangan,
-    		'status' => 'menunggu'
+    		'status' => 'menunggu',
+    		'status_pembayaran' => $kode_status,
     	];
 
     	$add = $this->db->insert('tbl_booking', $data);
