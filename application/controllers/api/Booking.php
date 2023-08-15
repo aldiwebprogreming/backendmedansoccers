@@ -47,6 +47,9 @@ class Booking extends REST_Controller
     			$status = "Menunggu";
     		}elseif($data['jam_selesai'] <= $jam){
     			$status = 'Selesai';
+    		}else{
+
+    			$status = 'Menunggu';
     		}
 
     		// echo $data['jam_booking']. " - ". $status. "<br>";
