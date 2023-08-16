@@ -50,6 +50,7 @@ class AddMemberKarir extends REST_Controller
     		'nama' => $this->post('nama'),
     		'email' => $this->post('email'),
     		'waktu_member' => $this->post('waktu_member'),
+    		'jml_bermain' => $this->post('waktu_member') * 12,
     		'total_harga' => $this->post('total_harga') * 1000,
     		'status_pembayaran' => $this->post('status_pembayaran'),
     		'tgl_mulai' => date('Y-m-d'),
