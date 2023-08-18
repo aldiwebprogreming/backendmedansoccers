@@ -30,10 +30,22 @@ class Main extends REST_Controller
 
       function index_get(){
 
+        $id_user = $this->get('id_user');
 
-      }
+        $this->db->where('id_user', $id_user);
+        $this->db->where('tgl_main', date('Y-m-d'));
 
-      function index_post(){
+        $cekdata = $this->db->get('tbl_main')->row_array();
+        if ($cekdata) {
+          $this->response(['tersedia' => true, 'data' => $cekdata], 200);
+        }else{
+         $this->response(['tersedia' => false], 200);
+       }
+
+
+     }
+
+     function index_post(){
 
        ini_set('date.timezone', 'Asia/Jakarta');
 
@@ -42,9 +54,17 @@ class Main extends REST_Controller
        $cek = $this->db->get('tbl_main')->row_array();
 
        if($cek == true){
+         $cek = $this->db->get_where('tbl_member_karir', ['id_user' => $this->post('id_user')])->row_array();
+         $sisa_bermain = $cek['sisa_bermain'];
 
-        $this->response(['message' => 'data tersedia'], 200);
-      }else{
+         $this->response(['message' => 'data tersedia', 'sisa_bermain' => $sisa_bermain], 200);
+       }else{
+
+        $cek = $this->db->get_where('tbl_member_karir', ['id_user' => $this->post('id_user')])->row_array();
+        $sisa_bermain = $cek['sisa_bermain'] - 1;
+
+        $this->db->where('id_user', $this->post('id_user'));
+        $this->db->update('tbl_member_karir', ['sisa_bermain' => $sisa_bermain]);
 
         $data = [
           'id_user' => $this->post('id_user'),
@@ -57,7 +77,7 @@ class Main extends REST_Controller
 
         $add = $this->db->insert('tbl_main', $data);
         if ($add) {
-          $this->response(['message' => 'true'], 201);
+          $this->response(['message' => 'true', 'sisa_bermain' => $sisa_bermain], 201);
         }else{
           $this->response(['message' =>'error'], 502);
         }
