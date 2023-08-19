@@ -20,8 +20,13 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		echo date('Y-m-d');
-		die();
-		$this->load->view('welcome_message');
+		// echo date('Y-m-d');
+		// die();
+		// $this->load->view('welcome_message');
+		// $waktu = 2;
+		// $tgl1    = date('Y-m-d'); // menentukan tanggal awal
+		// $tgl2    = date('Y-m-d', strtotime('+'.$waktu. 'month', strtotime($tgl1))); // penjumlahan tanggal sebanyak 7 hari
+		// echo $tgl2; // cetak tanggal
+
 	}
 }

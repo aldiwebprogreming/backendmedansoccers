@@ -30,7 +30,9 @@ class AddMemberKarir extends REST_Controller
     function index_get(){
 
     	$iduser = $this->get('id_user');
-    	$cek = $this->db->get_where('tbl_member_karir', ['id_user' => $iduser])->row_array();
+    	$this->db->where('kode_pembayaran', 200);
+    	$this->db->where('id_user', $iduser);
+    	$cek = $this->db->get_where('tbl_member_karir')->row_array();
 
     	if ($cek == true) {
     		
@@ -44,31 +46,36 @@ class AddMemberKarir extends REST_Controller
 
     function index_post(){
 
-    	
-    	$data = [
-    		'id_user' => $this->post('id'),
-    		'nama' => $this->post('nama'),
-    		'email' => $this->post('email'),
-    		'waktu_member' => $this->post('waktu_member'),
-    		'jml_bermain' => $this->post('waktu_member') * 12,
-    		'sisa_bermain' => $this->post('waktu_member') * 12,
-    		'total_harga' => $this->post('total_harga') * 1000,
-    		'status_pembayaran' => $this->post('status_pembayaran'),
-    		'tgl_mulai' => date('Y-m-d'),
-    		'tgl_selesai' => '',
-    		'pdf_url' => $this->post('pdf_url'),
-    	];
+    	$waktu_member = $this->post('waktu_member');
+		$tgl1    = date('Y-m-d'); // menentukan tanggal awal
+		$tgl_selesai    = date('Y-m-d', strtotime('+'.$waktu_member. 'month', strtotime($tgl1))); // penjumlahan bulan sebanyak tentukan member
 
-    	$add = $this->db->insert('tbl_member_karir', $data);
-    	if ($add) {
+		$data = [
+			'id_user' => $this->post('id'),
+			'nama' => $this->post('nama'),
+			'email' => $this->post('email'),
+			'waktu_member' => $this->post('waktu_member'),
+			'jml_bermain' => $this->post('waktu_member') * 12,
+			'sisa_bermain' => $this->post('waktu_member') * 12,
+			'total_harga' => $this->post('total_harga') * 1000,
+			'status_pembayaran' => $this->post('status_pembayaran'),
+			'tgl_mulai' => date('Y-m-d'),
+			'tgl_selesai' => $tgl_selesai,
+			'pdf_url' => $this->post('pdf_url'),
+		];
 
-    		$this->response($data, 201);
+		$add = $this->db->insert('tbl_member_karir', $data);
+		if ($add) {
 
-    	}else{
+			$this->response($data, 201);
 
-    		$this->response(['message' => 'gagal'], 502);
-    	}
-    }
+		}else{
+
+			$this->response(['message' => 'gagal'], 502);
+		}
+	}
+
+
 
 
 

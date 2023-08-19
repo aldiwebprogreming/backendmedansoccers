@@ -66,12 +66,18 @@ class Main extends REST_Controller
         $this->db->where('id_user', $this->post('id_user'));
         $this->db->update('tbl_member_karir', ['sisa_bermain' => $sisa_bermain]);
 
+
+        $this->db->order_by('team', 'RANDOM');
+        $team = $this->db->get('tbl_team')->row_array();
+
+
         $data = [
           'id_user' => $this->post('id_user'),
           'nama' => $this->post('nama'),
           'email' => $this->post('email'),
           'tgl_main' => date('Y-m-d'),
           'jam_main' => date('H:i'),
+          'team' => $team['team'],
           'status_main' => 0,
         ];
 
