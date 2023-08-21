@@ -30,18 +30,36 @@ class AddMemberKarir extends REST_Controller
     function index_get(){
 
     	$iduser = $this->get('id_user');
-    	$this->db->where('kode_pembayaran', 200);
-    	$this->db->where('id_user', $iduser);
-    	$cek = $this->db->get_where('tbl_member_karir')->row_array();
+    	$status = $this->get('status');
 
-    	if ($cek == true) {
+    	if ($status == 200) {
+
+    		$this->db->where('status_pembayaran', 200);
+    		$this->db->where('id_user', $iduser);
+    		$cek = $this->db->get('tbl_member_karir')->row_array();
+
+    		if ($cek == true) {
+
+    			$this->response($cek, 200);
+    		}else{
+
+    			$this->response($cek, 404);
+    		}
     		
-    		$this->response($cek, 200);
     	}else{
 
-    		$this->response($cek, 404);
-    	}
+    		$this->db->where('id_user', $iduser);
+    		$cek = $this->db->get('tbl_member_karir')->row_array();
 
+    		if ($cek == true) {
+
+    			$this->response($cek, 200);
+    		}else{
+
+    			$this->response($cek, 404);
+    		}
+    	}
+    	
     }
 
     function index_post(){
