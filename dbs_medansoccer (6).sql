@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2023 at 11:17 AM
+-- Generation Time: Aug 22, 2023 at 11:09 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -52,6 +52,28 @@ INSERT INTO `tbl_booking` (`id`, `kode_booking`, `jam_booking`, `jam_mulai`, `ja
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_jambookingmain`
+--
+
+CREATE TABLE `tbl_jambookingmain` (
+  `id` int(11) NOT NULL,
+  `sesi_main` varchar(50) NOT NULL,
+  `jam_mulai` varchar(15) NOT NULL,
+  `jam_selesai` varchar(15) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_jambookingmain`
+--
+
+INSERT INTO `tbl_jambookingmain` (`id`, `sesi_main`, `jam_mulai`, `jam_selesai`, `date`) VALUES
+(1, 'sesi-1', '08.00', '09.00', '2023-08-22 01:51:19'),
+(2, 'sesi-2', '09.00', '10.00', '2023-08-22 01:51:19');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_lapangan`
 --
 
@@ -78,6 +100,33 @@ INSERT INTO `tbl_lapangan` (`id`, `lapangan`, `slug`, `pasilitas`, `harga_perjam
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_lawan`
+--
+
+CREATE TABLE `tbl_lawan` (
+  `id` int(11) NOT NULL,
+  `team` varchar(20) NOT NULL,
+  `lawan` varchar(30) NOT NULL,
+  `jadwal` varchar(20) NOT NULL,
+  `status` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_lawan`
+--
+
+INSERT INTO `tbl_lawan` (`id`, `team`, `lawan`, `jadwal`, `status`, `date`) VALUES
+(1, 'Merah', 'Putih', '1', 1, '2023-08-22 04:57:48'),
+(2, 'Hitam', 'Biru', '1', 1, '2023-08-22 04:57:51'),
+(3, 'Merah', 'Hitam', '2', 0, '2023-08-22 04:54:03'),
+(4, 'Biru', 'Putih', '2', 0, '2023-08-22 04:54:09'),
+(5, 'Putih', 'Hitam', '3', 0, '2023-08-22 04:54:12'),
+(6, 'Biru', 'Merah', '3', 0, '2023-08-22 04:54:15');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_main`
 --
 
@@ -88,18 +137,13 @@ CREATE TABLE `tbl_main` (
   `email` varchar(30) NOT NULL,
   `tgl_main` varchar(30) NOT NULL,
   `jam_main` varchar(30) NOT NULL,
+  `jam_selesai` varchar(20) NOT NULL,
+  `sesi_main` varchar(20) NOT NULL,
   `team` varchar(50) NOT NULL,
+  `team_lawan` varchar(20) NOT NULL,
   `status_main` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_main`
---
-
-INSERT INTO `tbl_main` (`id`, `id_user`, `nama`, `email`, `tgl_main`, `jam_main`, `team`, `status_main`, `date`) VALUES
-(32, '7GSFOb5QeAayjmpr9NvJRAbppsZ2', 'davin al', 'davinal1956@gmail.com', '2023-08-21', '10:45', 'Merah', 0, '2023-08-21 03:45:12'),
-(33, 'p6uDamGkKOVXkjU2m7dcRFZavmp1', 'mediarakyat auditor', 'mediarakyatauditor@gmail.com', '2023-08-21', '13:11', 'Merah', 0, '2023-08-21 06:12:52');
 
 -- --------------------------------------------------------
 
@@ -128,8 +172,9 @@ CREATE TABLE `tbl_member_karir` (
 --
 
 INSERT INTO `tbl_member_karir` (`id`, `id_user`, `nama`, `email`, `waktu_member`, `total_harga`, `tgl_mulai`, `tgl_selesai`, `jml_bermain`, `sisa_bermain`, `status_pembayaran`, `pdf_url`, `date`) VALUES
-(54, 'p6uDamGkKOVXkjU2m7dcRFZavmp1', 'mediarakyat auditor', 'mediarakyatauditor@gmail.com', '1', '200000', '2023-08-21', '2023-09-21', 12, '10', '200', 'https://app.sandbox.midtrans.com/snap/v1/transactions/8275113d-0fb7-4abe-aa9b-074208d6bc08/pdf', '2023-08-21 06:11:49'),
-(55, '7GSFOb5QeAayjmpr9NvJRAbppsZ2', 'davin al', 'davinal1956@gmail.com', '1', '200000', '2023-08-21', '2023-09-21', 12, '11', '200', 'https://app.sandbox.midtrans.com/snap/v1/transactions/05d50929-e550-4524-b7eb-7a8f4c2c13fc/pdf', '2023-08-21 03:45:12');
+(56, 'YVhDWVByVoQzzdiM7eRqfKaGBOx1', 'nusa digital', 'nusadigital96@gmail.com', '1', '200000', '2023-08-22', '2023-09-22', 12, '9', '200', 'https://app.sandbox.midtrans.com/snap/v1/transactions/cbb7ab51-85c8-4fc5-9c31-76d1c3575cf5/pdf', '2023-08-22 06:36:14'),
+(57, 'p6uDamGkKOVXkjU2m7dcRFZavmp1', 'mediarakyat auditor', 'mediarakyatauditor@gmail.com', '1', '200000', '2023-08-22', '2023-09-22', 12, '10', '200', 'https://app.sandbox.midtrans.com/snap/v1/transactions/8b1d09d1-f17a-43b2-b6ae-48106865b9a0/pdf', '2023-08-22 06:36:47'),
+(58, '7GSFOb5QeAayjmpr9NvJRAbppsZ2', 'davin al', 'davinal1956@gmail.com', '1', '200000', '2023-08-22', '2023-09-22', 12, '9', '200', 'https://app.sandbox.midtrans.com/snap/v1/transactions/eeef35a6-2a6b-4956-a089-c024b3aab794/pdf', '2023-08-22 06:36:28');
 
 -- --------------------------------------------------------
 
@@ -176,9 +221,9 @@ CREATE TABLE `tbl_profil` (
 --
 
 INSERT INTO `tbl_profil` (`id`, `kode_user`, `id_auth`, `nama`, `email`, `alamat`, `jk`, `tgl_lahir`, `nik`, `posisi`, `date`) VALUES
-(19, 'user-45', 'YVhDWVByVoQzzdiM7eRqfKaGBOx1', 'nusa digital', 'nusadigital96@gmail.com', 'Medan', 'Laki - Laki', '2023-08-21', '242424242424', 'Penyerang', '2023-08-21 01:30:58'),
-(20, 'user-281', 'p6uDamGkKOVXkjU2m7dcRFZavmp1', 'mediarakyat auditor', 'mediarakyatauditor@gmail.com', 'Medan', 'Laki - Laki', '2023-08-28', '343434343', 'Pertahanan', '2023-08-21 01:34:40'),
-(21, 'user-966', '7GSFOb5QeAayjmpr9NvJRAbppsZ2', 'davin al', 'davinal1956@gmail.com', 'Medan', 'Laki - Laki', '2023-08-20', '3434345343535353', 'Penjaga Gawang', '2023-08-21 03:44:13');
+(22, 'user-664', 'YVhDWVByVoQzzdiM7eRqfKaGBOx1', 'nusa digital', 'nusadigital96@gmail.com', 'Medan', 'Laki - Laki', '2023-08-22', '22424242424', 'Pertahanan', '2023-08-22 01:58:43'),
+(23, 'user-919', 'p6uDamGkKOVXkjU2m7dcRFZavmp1', 'mediarakyat auditor', 'mediarakyatauditor@gmail.com', 'Binjiia', 'Laki - Laki', '2023-08-22', '3434343', 'Penyerang', '2023-08-22 02:23:10'),
+(24, 'user-792', '7GSFOb5QeAayjmpr9NvJRAbppsZ2', 'davin al', 'davinal1956@gmail.com', 'Binjai', 'Laki - Laki', '2023-08-22', '3434343', 'Sayap', '2023-08-22 03:07:25');
 
 -- --------------------------------------------------------
 
@@ -224,7 +269,9 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id`, `kode_user`, `nama`, `email`, `nik`, `id_auth`, `date`) VALUES
-(12, 'user-966', 'davin al', 'davinal1956@gmail.com', '3434345343535353', '7GSFOb5QeAayjmpr9NvJRAbppsZ2', '2023-08-21 03:44:13');
+(13, 'user-664', 'nusa digital', 'nusadigital96@gmail.com', '22424242424', 'YVhDWVByVoQzzdiM7eRqfKaGBOx1', '2023-08-22 01:58:43'),
+(14, 'user-919', 'mediarakyat auditor', 'mediarakyatauditor@gmail.com', '3434343', 'p6uDamGkKOVXkjU2m7dcRFZavmp1', '2023-08-22 02:23:10'),
+(15, 'user-792', 'davin al', 'davinal1956@gmail.com', '3434343', '7GSFOb5QeAayjmpr9NvJRAbppsZ2', '2023-08-22 03:07:25');
 
 --
 -- Indexes for dumped tables
@@ -237,9 +284,21 @@ ALTER TABLE `tbl_booking`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_jambookingmain`
+--
+ALTER TABLE `tbl_jambookingmain`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_lapangan`
 --
 ALTER TABLE `tbl_lapangan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_lawan`
+--
+ALTER TABLE `tbl_lawan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -295,16 +354,22 @@ ALTER TABLE `tbl_lapangan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `tbl_lawan`
+--
+ALTER TABLE `tbl_lawan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `tbl_main`
 --
 ALTER TABLE `tbl_main`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `tbl_member_karir`
 --
 ALTER TABLE `tbl_member_karir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `tbl_pembayaran`
@@ -316,7 +381,7 @@ ALTER TABLE `tbl_pembayaran`
 -- AUTO_INCREMENT for table `tbl_profil`
 --
 ALTER TABLE `tbl_profil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_team`
@@ -328,7 +393,7 @@ ALTER TABLE `tbl_team`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

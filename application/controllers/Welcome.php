@@ -27,6 +27,9 @@ class Welcome extends CI_Controller {
 		// $tgl1    = date('Y-m-d'); // menentukan tanggal awal
 		// $tgl2    = date('Y-m-d', strtotime('+'.$waktu. 'month', strtotime($tgl1))); // penjumlahan tanggal sebanyak 7 hari
 		// echo $tgl2; // cetak tanggal
+		ini_set('date.timezone', 'Asia/Jakarta');
+
+
 
 	}
 }

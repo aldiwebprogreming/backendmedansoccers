@@ -6,7 +6,7 @@ require APPPATH . '/libraries/REST_Controller.php';
 /**
  * 
  */
-class Mainhariini extends REST_Controller
+class Lawanmainhariini extends REST_Controller
 {
 	
 	function __construct($config = 'rest')
@@ -35,23 +35,21 @@ class Mainhariini extends REST_Controller
     	$this->db->where('id_user', $iduser);
     	$cekmain = $this->db->get('tbl_main')->row_array();
 
-    	$team = $cekmain['team'];
-    	$jam_main = $cekmain['jam_main'];
+
+
+    	$this->db->where('status', 1);
+    	$this->db->where('team', $cekmain['team']);
+    	$this->db->or_where('lawan', $cekmain['team']); 
+    	$match = $this->db->get('tbl_lawan')->row_array();
+
 
     	$this->db->where('tgl_main', date('Y-m-d'));
-    	$this->db->where('team', $team);
-    	$this->db->where('jam_main', $jam_main);
-    	$mainhariini = $this->db->get('tbl_main')->result_array();
+    	$this->db->where('team', $match['lawan']);
+    	$lawan = $this->db->get('tbl_main')->result_array();
 
 
-    	$this->db->where('tgl_main', date('Y-m-d'));
-    	$this->db->where('team', $team);
-    	$this->db->where('jam_main', $jam_main);
-    	$total = $this->db->get('tbl_main')->num_rows();
-
-
-    	if ($mainhariini) {
-    		$this->response(['total_pemain' => $total, 'data' => $mainhariini], 200);
+    	if ($lawan) {
+    		$this->response($lawan, 200);
     	}else{
 
     		$this->response(['message' => false], 404);
