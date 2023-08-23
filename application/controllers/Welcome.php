@@ -29,7 +29,10 @@ class Welcome extends CI_Controller {
 		// echo $tgl2; // cetak tanggal
 		ini_set('date.timezone', 'Asia/Jakarta');
 
-
+		$tgl1 = new DateTime("2023-08-23");
+		$tgl2 = new DateTime("2023-08-23");
+		$d = $tgl2->diff($tgl1)->days + 1;
+		echo $d." hari";
 
 	}
 }

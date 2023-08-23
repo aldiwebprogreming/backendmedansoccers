@@ -34,6 +34,7 @@ class AddMemberKarir extends REST_Controller
 
     	if ($status == 200) {
 
+    		$this->db->order_by('id', 'desc');
     		$this->db->where('status_pembayaran', 200);
     		$this->db->where('id_user', $iduser);
     		$cek = $this->db->get('tbl_member_karir')->row_array();
@@ -48,12 +49,17 @@ class AddMemberKarir extends REST_Controller
     		
     	}else{
 
+    		$this->db->order_by('id', 'desc');
     		$this->db->where('id_user', $iduser);
     		$cek = $this->db->get('tbl_member_karir')->row_array();
 
+    		// $tglsekarang = date('Y-m-d');
+    		// $tglselesai = new DateTime($cek['tgl_selesai']);
+    		// $sisa = $tglselesai->diff($tglsekarang)->days + 1;
+
     		if ($cek == true) {
 
-    			$this->response($cek, 200);
+    			$this->response($cek,200);
     		}else{
 
     			$this->response($cek, 404);

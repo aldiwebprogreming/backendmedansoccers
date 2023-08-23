@@ -60,10 +60,13 @@ class Main extends REST_Controller
          $this->response(['message' => 'data tersedia', 'sisa_bermain' => $sisa_bermain], 200);
        }else{
 
+        $this->db->order_by('id', 'desc');
         $cek = $this->db->get_where('tbl_member_karir', ['id_user' => $this->post('id_user')])->row_array();
         $sisa_bermain = $cek['sisa_bermain'] - 1;
+        $id = $cek['id'];
 
-        $this->db->where('id_user', $this->post('id_user'));
+
+        $this->db->where('id',$id);
         $this->db->update('tbl_member_karir', ['sisa_bermain' => $sisa_bermain]);
 
 
@@ -76,8 +79,8 @@ class Main extends REST_Controller
           $jammain = '08.00';
           $jamselesai = '09.00';
           $sesi = 'sesi-1';
-        }elseif($jamnow > '08'){
 
+        }elseif($jamnow >= '08'){
 
           $jammain = '09.00';
           $jamselesai = '10.00';
@@ -93,8 +96,8 @@ class Main extends REST_Controller
           'nama' => $this->post('nama'),
           'email' => $this->post('email'),
           'tgl_main' => date('Y-m-d'),
-          'jam_main' => $jammain,
-          'jam_selesai' => $jamselesai,
+          'jam_main' => '10.00',
+          // 'jam_selesai' => $jamselesai,
           'sesi_main' => $sesi,
           'team' => $team,
           'team_lawan' => '',
@@ -111,11 +114,6 @@ class Main extends REST_Controller
     }
 
 
-
-    function acaklawan(){
-
-
-    }
 
 
   }
