@@ -31,7 +31,7 @@ class Welcome extends CI_Controller {
 
 		$tgl1 = new DateTime("2023-08-23");
 		$tgl2 = new DateTime("2023-08-23");
-		$d = $tgl2->diff($tgl1)->days + 1;
+		$d = $tgl2->diff($tgl1)->days + 0;
 		echo $d." hari";
 
 	}

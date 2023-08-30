@@ -101,7 +101,7 @@ class Main extends REST_Controller
           'sesi_main' => $sesi,
           'team' => $team,
           'team_lawan' => '',
-          'status_main' => 0,
+          'status_main' => 1,
         ];
 
         $add = $this->db->insert('tbl_main', $data);

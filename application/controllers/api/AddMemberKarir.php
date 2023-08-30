@@ -59,7 +59,7 @@ class AddMemberKarir extends REST_Controller
 
     		if ($cek == true) {
 
-    			$this->response($cek,200);
+    			$this->response($cek, 200);
     		}else{
 
     			$this->response($cek, 404);
