@@ -64,7 +64,8 @@ class Updatestatusmain extends REST_Controller
 
        $id = $dat['id'];
        $this->db->where('id', $id);
-       $this->db->update('tbl_main', ['status_main' => $status]);
+       $update = $this->db->update('tbl_main', ['status_main' => $status]);
+       $this->response($update);
 
 
      }
