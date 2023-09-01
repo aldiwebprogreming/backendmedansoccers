@@ -123,6 +123,64 @@
 			}
 
 
+			function data_goal(){
+				$data['goal'] = $this->db->get_where('tbl_goal')->result_array();
+				$data['pemain'] = $this->db->get_where('tbl_user')->result_array();
+				$this->load->view('template/header');
+				$this->load->view('app/data_goal', $data);
+				$this->load->view('template/footer');
+			}
+
+
+			function add_goal(){
+				$nama = $this->input->post('nama');
+				$user = $this->db->get_where('tbl_user', ['nama' => $nama])->row_array();
+
+				$data = [
+					'nama' => $this->input->post('nama'),
+					'id_auth' => $user['id_auth'],
+					'jml_goal' => $this->input->post('jml_goal'),
+					'team' => $this->input->post('team'),
+					'lawan' => $this->input->post('lawan'),
+					'score' => $this->input->post('score'),
+				];
+
+				$this->db->insert('tbl_goal', $data);
+				$this->session->set_flashdata('message', 'swal("Yess!", "Data berhasil ditambah", "success" );');
+				redirect('app/data_goal');
+			}
+
+			function edit_goal(){
+
+
+				$data = [
+					'nama' => $this->input->post('nama'),
+					'id_auth' => $user['id_auth'],
+					'jml_goal' => $this->input->post('jml_goal'),
+					'team' => $this->input->post('team'),
+					'lawan' => $this->input->post('lawan'),
+					'score' => $this->input->post('score'),
+				];
+
+				
+				$id = $this->input->post('id');
+				$this->db->where('id', $id);
+				$this->db->update('tbl_goal', $data);
+
+				$this->session->set_flashdata('message', 'swal("Yess!", "Data berhasil diubah", "success" );');
+				redirect('app/data_goal');
+			}
+
+
+			function hapus_goal(){
+
+				$id = $this->input->post('id');
+				$this->db->where('id', $id);
+				$this->db->delete('tbl_goal');
+
+				$this->session->set_flashdata('message', 'swal("Yess!", "Data berhasil dihapus", "success" );');
+				redirect('app/data_goal');
+			}
 
 		}
 	?>
