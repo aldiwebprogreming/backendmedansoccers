@@ -142,7 +142,8 @@
 					'jml_goal' => $this->input->post('jml_goal'),
 					'team' => $this->input->post('team'),
 					'lawan' => $this->input->post('lawan'),
-					'score' => $this->input->post('score'),
+					'score_team' => $this->input->post('score_team'),
+					'score_lawan' => $this->input->post('score_lawan'),
 				];
 
 				$this->db->insert('tbl_goal', $data);
@@ -159,7 +160,8 @@
 					'jml_goal' => $this->input->post('jml_goal'),
 					'team' => $this->input->post('team'),
 					'lawan' => $this->input->post('lawan'),
-					'score' => $this->input->post('score'),
+					'score_team' => $this->input->post('score_team'),
+					'score_lawan' => $this->input->post('score_lawan'),
 				];
 
 				
@@ -180,6 +182,77 @@
 
 				$this->session->set_flashdata('message', 'swal("Yess!", "Data berhasil dihapus", "success" );');
 				redirect('app/data_goal');
+			}
+
+
+			function data_asist(){
+
+				$data['asist'] = $this->db->get_where('tbl_asist')->result_array();
+				$data['pemain'] = $this->db->get_where('tbl_user')->result_array();
+				$this->load->view('template/header');
+				$this->load->view('app/data_asist', $data);
+				$this->load->view('template/footer');
+			}
+
+			function add_asist(){
+
+				$nama = $this->input->post('nama');
+				$user = $this->db->get_where('tbl_user', ['nama' => $nama])->row_array();
+
+				$data = [
+					'nama' => $this->input->post('nama'),
+					'id_auth' => $user['id_auth'],
+					'jml_asist' => $this->input->post('jml_asist'),
+					'team' => $this->input->post('team'),
+					'lawan' => $this->input->post('lawan'),
+					'score_team' => $this->input->post('score_team'),
+					'score_lawan' => $this->input->post('score_lawan'),
+				];
+
+				$this->db->insert('tbl_asist', $data);
+
+				$this->session->set_flashdata('message', 'swal("Yess!", "Data berhasil ditambah", "success" );');
+				redirect('app/data_asist');
+			}
+
+
+			function edit_asist(){
+
+				$data = [
+					'nama' => $this->input->post('nama'),
+					'id_auth' => $user['id_auth'],
+					'jml_asist' => $this->input->post('jml_asist'),
+					'team' => $this->input->post('team'),
+					'lawan' => $this->input->post('lawan'),
+					'score_team' => $this->input->post('score_team'),
+					'score_lawan' => $this->input->post('score_lawan'),
+				];
+
+				$id = $this->input->post('id');
+				$this->db->where('id', $id);
+				$this->db->update('tbl_asist', $data);
+
+				$this->session->set_flashdata('message', 'swal("Yess!", "Data berhasil diubah", "success" );');
+				redirect('app/data_asist');
+			}
+
+			function hapus_asist(){
+
+				$id = $this->input->post('id');
+				$this->db->where('id', $id);
+				$this->db->delete('tbl_asist');
+
+				$this->session->set_flashdata('message', 'swal("Yess!", "Data berhasil dihapus", "success" );');
+				redirect('app/data_asist');
+			}
+
+			function data_mainhariini(){
+
+				$data['main'] = $this->db->get_where('tbl_main', ['tgl_main' => date('Y-m-d')])->result_array();
+				$data['team'] = $this->db->get_where('tbl_lawan', ['status' => 1])->result_array();
+				$this->load->view('template/header');
+				$this->load->view('app/data_mainhariini', $data);
+				$this->load->view('template/footer');
 			}
 
 		}
