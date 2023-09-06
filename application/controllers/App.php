@@ -205,8 +205,8 @@
 					'jml_asist' => $this->input->post('jml_asist'),
 					'team' => $this->input->post('team'),
 					'lawan' => $this->input->post('lawan'),
-					'score_team' => $this->input->post('score_team'),
-					'score_lawan' => $this->input->post('score_lawan'),
+					// 'score_team' => $this->input->post('score_team'),
+					// 'score_lawan' => $this->input->post('score_lawan'),
 				];
 
 				$this->db->insert('tbl_asist', $data);
@@ -224,8 +224,8 @@
 					'jml_asist' => $this->input->post('jml_asist'),
 					'team' => $this->input->post('team'),
 					'lawan' => $this->input->post('lawan'),
-					'score_team' => $this->input->post('score_team'),
-					'score_lawan' => $this->input->post('score_lawan'),
+					// 'score_team' => $this->input->post('score_team'),
+					// 'score_lawan' => $this->input->post('score_lawan'),
 				];
 
 				$id = $this->input->post('id');
@@ -253,6 +253,97 @@
 				$this->load->view('template/header');
 				$this->load->view('app/data_mainhariini', $data);
 				$this->load->view('template/footer');
+			}
+
+			function add_goal2(){
+
+				$iduser = $this->input->post('id');
+				$goal = $this->input->post('goal');
+
+				$user = $this->db->get_where('tbl_user', ['id_auth' => $iduser])->row_array();
+				$cektotal = $this->db->get_where('tbl_total_goal', ['id_user' => $iduser])->row_array();
+
+				if ($cektotal) {
+
+
+					$data = [
+						'total' => $cektotal['total'] + 1
+					];	
+					
+					$this->db->where('id_user', $iduser);
+					$this->db->update('tbl_total_goal', $data);
+				}else{
+
+					$data = [
+
+						'id_user' => $iduser,
+						'nama' => $user['nama'],
+						'total' => 1, 
+					];
+
+					$this->db->insert('tbl_total_goal', $data);
+				}
+
+
+
+				$data = [
+					'nama' => $user['nama'],
+					'id_auth' => $user['id_auth'],
+					'jml_goal' => $this->input->post('goal'),
+					'team' => $this->input->post('team'),
+					'lawan' => $this->input->post('lawan'),
+					// 'score_team' => $this->input->post('score_team'),
+					// 'score_lawan' => $this->input->post('score_lawan'),
+				];
+
+				$this->db->insert('tbl_goal', $data);
+				$this->session->set_flashdata('message', 'swal("Yess!", "Data berhasil ditambah", "success" );');
+				redirect('app/data_mainhariini');
+			}
+
+			function add_asist2(){
+
+				$iduser = $this->input->post('id');
+				$asist = $this->input->post('asist');
+
+				$user = $this->db->get_where('tbl_user', ['id_auth' => $iduser])->row_array();
+
+				$data = [
+					'nama' => $user['nama'],
+					'id_auth' => $user['id_auth'],
+					'jml_asist' => $this->input->post('asist'),
+					'team' => $this->input->post('team'),
+					'lawan' => $this->input->post('lawan'),
+					// 'score_team' => $this->input->post('score_team'),
+					// 'score_lawan' => $this->input->post('score_lawan'),
+				];
+
+				$this->db->insert('tbl_asist', $data);
+				$this->session->set_flashdata('message', 'swal("Yess!", "Data berhasil ditambah", "success" );');
+				redirect('app/data_mainhariini');
+			}
+
+
+			function data_lawan(){
+
+				$data['lawan'] = $this->db->get('tbl_lawan')->result_array();
+				$this->load->view('template/header');
+				$this->load->view('app/data_lawan', $data);
+				$this->load->view('template/footer');
+			}
+
+			function set_lawan(){
+
+				$this->db->update('tbl_lawan', ['status' => 0]);
+
+				$data = [
+					'status' => 1,
+				];
+
+				$this->db->where('jadwal', $this->input->post('jadwal'));
+				$this->db->update('tbl_lawan', $data);
+				$this->session->set_flashdata('message', 'swal("Yess!", "Setting lawan berhasil", "success" );');
+				redirect('app/data_lawan');
 			}
 
 		}

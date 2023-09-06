@@ -90,6 +90,21 @@ class Main extends REST_Controller
 
         $team = $team['team'];
 
+        $this->db->where('tgl_main', date('Y-m-d'));
+        $this->db->where('team', $team);
+        $ceknomor = $this->db->get('tbl_main')->row_array();
+        if ($ceknomor == null) {
+
+          $nomor = 10;
+        }else{
+
+          $this->db->order_by('id', 'desc');
+          $this->db->where('tgl_main', date('Y-m-d'));
+          $this->db->where('team', $team);
+          $ceknomor = $this->db->get('tbl_main')->row_array();
+          $nomor = $ceknomor['nomor_punggung'] - 1;
+
+        }
 
         $data = [
           'id_user' => $this->post('id_user'),
@@ -101,6 +116,7 @@ class Main extends REST_Controller
           'sesi_main' => $sesi,
           'team' => $team,
           'team_lawan' => '',
+          'nomor_punggung' => $nomor,
           'status_main' => 1,
         ];
 

@@ -50,10 +50,10 @@
                             <option>Putih</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                   <!--  <div class="form-group col-md-6">
                       <label for="inputPassword4">Score Team</label>
                       <input type="number" name="score_team" class="form-control" value="0" id="inputPassword4" >
-                  </div>
+                  </div> -->
               </div>
 
 
@@ -70,10 +70,10 @@
                     </select>
                 </div>
 
-                <div class="form-group col-md-6">
+              <!--   <div class="form-group col-md-6">
                     <label for="inputPassword4">Score Lawan</label>
                     <input type="number" name="score_lawan" value="0" class="form-control">
-                </div>
+                </div> -->
 
             </div>
 
@@ -99,9 +99,9 @@
                     <th>Nama pemain</th>
                     <th>Jml Goal</th>
                     <th>Team</th>
-                    <th>Score Team</th>
+                    <!--     <th>Score Team</th> -->
                     <th>Lawan</th>
-                    <th>Score Lawan</th>
+                    <!--   <th>Score Lawan</th> -->
                     <th>Opsi</th>
                 </tr>
             </thead>
@@ -110,9 +110,9 @@
                     <th>Nama Pemain</th>
                     <th>Jml Goal</th>
                     <th>Team</th>
-                    <th>Score Team</th>
+                    <!--    <th>Score Team</th> -->
                     <th>Lawan</th>
-                    <th>Score Lawan</th>
+                    <!--  <th>Score Lawan</th> -->
                     <th>Opsi</th>
                 </tr>
             </tfoot>
@@ -124,9 +124,9 @@
                         <td><?= $data['nama'] ?></td>
                         <td><?= $data['jml_goal'] ?></td>
                         <td><?= $data['team'] ?></td>
-                        <td><?= $data['score_team'] ?></td>
+                        <!--     <td><?= $data['score_team'] ?></td> -->
                         <td><?= $data['lawan'] ?></td>
-                        <td><?= $data['score_lawan'] ?></td>
+                        <!--   <td><?= $data['score_lawan'] ?></td> -->
                         <td>
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModaledit<?= $data['id'] ?>"><i class="fas fa-pen"></i></button>
                             <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalhapus<?= $data['id'] ?>"><i class="fas fa-trash"></i></button>
@@ -174,10 +174,10 @@
                                             <option>Putih</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                   <!--  <div class="form-group col-md-6">
                                       <label for="inputPassword4">Score Team</label>
                                       <input type="number" name="score_team" class="form-control" value="0" id="inputPassword4" >
-                                  </div>
+                                  </div> -->
                               </div>
 
 
@@ -193,46 +193,46 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-6">
+                              <!--   <div class="form-group col-md-6">
                                     <label for="inputPassword4">Score Lawan</label>
                                     <input type="number" name="score_lawan" value="0" class="form-control">
                                 </div>
-
-                            </div>
-
+                            -->
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
-                    </form>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
-
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalhapus<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-            <form method="post" action="<?= base_url('app/hapus_goal') ?>">
-                <input type="hidden" name="id" value="<?= $data['id'] ?>">
-                <h4>Apakah anda ingin menghapus data ini ?</h4>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Delete</button>
-            </div>
-        </form>
     </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalhapus<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="<?= base_url('app/hapus_goal') ?>">
+            <input type="hidden" name="id" value="<?= $data['id'] ?>">
+            <h4>Apakah anda ingin menghapus data ini ?</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Delete</button>
+        </div>
+    </form>
+</div>
 </div>
 </div>
 

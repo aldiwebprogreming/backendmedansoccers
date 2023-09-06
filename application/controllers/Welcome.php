@@ -29,10 +29,21 @@ class Welcome extends CI_Controller {
 		// echo $tgl2; // cetak tanggal
 		ini_set('date.timezone', 'Asia/Jakarta');
 
-		$tgl1 = new DateTime("2023-08-23");
-		$tgl2 = new DateTime("2023-08-23");
-		$d = $tgl2->diff($tgl1)->days + 0;
-		echo $d." hari";
+		// $tgl1 = new DateTime("2023-08-23");
+		// $tgl2 = new DateTime("2023-08-23");
+		// $d = $tgl2->diff($tgl1)->days + 0;
+		// echo $d." hari";
+
+		// $kode = rand(2, 10);
+		// echo $kode;
+
+		$this->db->select('*');
+		$this->db->from('tbl_booking');
+		$this->db->join('tbl_jambooking_lapangan', 'tbl_jambooking_lapangan.jam_mulai = tbl_booking.jam_mulai');
+		$query = $this->db->get()->result_array();
+
+		var_dump($query);
+
 
 	}
 }
